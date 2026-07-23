@@ -141,7 +141,55 @@ button {
 
 }
 
+.delivery-box {
 
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background: rgba(212,175,55,0.08);
+    border: 1px solid rgba(212,175,55,0.35);
+    border-radius: 20px;
+    padding: 22px 15px;
+    text-align: center;
+
+}
+
+
+.delivery-box h3 {
+
+    color: #d4af37;
+    font-size: 20px;
+    margin-bottom: 12px;
+
+}
+
+
+#next-delivery {
+
+    color: #f5e6c8;
+    font-size: 18px;
+    line-height: 2;
+    margin-bottom: 8px;
+
+}
+
+
+#countdown {
+
+    color: #d4af37;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 12px 0;
+
+}
+
+
+.delivery-box span {
+
+    color: #c9b896;
+    font-size: 14px;
+
+}
 
 
 
