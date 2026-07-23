@@ -1,43 +1,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 
+
 *{
+
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:'Vazirmatn',sans-serif;
+
 }
+
+
 
 body{
 
+
     background:
 
-linear-gradient(
+    linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f4f1ea 100%
+    );
 
-180deg,
 
-#fdfcf9 0%,
-
-#f5f2eb 100%
-
-);
     color:#222;
-
-}
-
-.container{
-
-    max-width:480px;
-    margin:auto;
 
     min-height:100vh;
 
-    padding:35px 25px;
-
-    text-align:center;
 
 }
 
+
+
+.container{
+
+
+    max-width:480px;
+
+    margin:auto;
+
+    padding:35px 25px 45px;
+
+    text-align:center;
+
+
+}
+
+
+
 .logo{
+
 
     width:140px;
 
@@ -46,157 +59,142 @@ linear-gradient(
     filter:
 
     drop-shadow(
-        0 10px 18px rgba(0,0,0,.18)
+    0 10px 18px rgba(0,0,0,.15)
     );
 
+
 }
+
+
+
 h1{
+
 
     font-size:30px;
 
-    font-weight:700;
+    font-weight:800;
 
     margin-bottom:10px;
 
+
 }
+
+
 
 .subtitle{
 
-    color:#666;
-
-    font-size:16px;
-
-    margin-bottom:30px;
-
-}
-
-.timer-box{
-
-    background:rgba(255,255,255,.75);
-
-    backdrop-filter:blur(12px);
-
-    -webkit-backdrop-filter:blur(12px);
-
-    border:1px solid rgba(255,255,255,.4);
-
-    border-radius:22px;
-
-    padding:30px;
-
-    margin-bottom:35px;
-
-    box-shadow:
-
-    0 15px 40px rgba(0,0,0,.08);
-
-}
-
-.timer-title{
 
     font-size:16px;
 
     color:#666;
 
-    margin-bottom:15px;
+    line-height:2;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+/* وضعیت سفارش */
+
+
+.status-box{
+
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    font-size:15px;
 
     font-weight:600;
 
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.06);
+
+
 }
+
+
+
+/* تایمر */
+
+
+.timer-box{
+
+
+    background:
+
+    rgba(255,255,255,.8);
+
+
+    backdrop-filter:blur(12px);
+
+
+    border-radius:24px;
+
+
+    padding:30px 20px;
+
+
+    margin-bottom:30px;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.08);
+
+
+}
+
+
+
+.timer-title{
+
+
+    color:#666;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    margin-bottom:15px;
+
+
+}
+
+
+
 #countdown{
+
 
     font-size:42px;
 
     font-weight:800;
 
+    letter-spacing:2px;
+
     color:#1b5e20;
 
-    letter-spacing:2px;
+
+    animation:
+
+    pulse 1.8s infinite;
+
 
 }
 
-<h2>
 
-قبل از ارسال پیام، این اطلاعات را آماده کنید
-
-</h2>
-
-<div class="step">
-
-🚬 برند سیگار
-
-</div>
-
-<div class="step">
-
-📦 تعداد موردنیاز
-
-</div>
-
-<div class="step">
-
-🏢 نام ساختمان و شماره واحد
-
-</div>
-
-<div class="step">
-
-📱 شماره تماس
-
-</div>
-
-<div class="step">
-
-✅ پس از ارسال پیام، منتظر تأیید سفارش بمانید.
-
-</div>
-.whatsapp-btn{
-
-    display:block;
-
-    margin-top:35px;
-
-    padding:18px;
-
-    border-radius:18px;
-
-    background:#25D366;
-
-    color:white;
-
-    text-decoration:none;
-
-    font-size:19px;
-
-    font-weight:700;
-
-    transition:.25s;
-
-    box-shadow:
-
-    0 12px 25px rgba(37,211,102,.35);
-
-}}
-
-.whatsapp-btn:hover{
-
-    transform:
-
-    translateY(-4px)
-    scale(1.02);
-
-    box-shadow:
-
-    0 18px 35px rgba(37,211,102,.45);
-
-}}
-
-
-/* ========================= */
-/* Animation */
-/* ========================= */
 
 @keyframes pulse{
+
 
     0%{
 
@@ -204,11 +202,13 @@ h1{
 
     }
 
+
     50%{
 
         transform:scale(1.04);
 
     }
+
 
     100%{
 
@@ -216,10 +216,208 @@ h1{
 
     }
 
+
 }
 
-#countdown{
 
-    animation:pulse 1.8s infinite;
+
+
+/* اطلاعات */
+
+
+.steps{
+
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:25px;
+
+
+    text-align:right;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.07);
+
+
+}
+
+
+
+.steps h2{
+
+
+    text-align:center;
+
+    font-size:21px;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+.step{
+
+
+    padding:14px 0;
+
+    border-bottom:1px solid #eee;
+
+    font-size:16px;
+
+    line-height:1.8;
+
+
+}
+
+
+
+.step:last-child{
+
+
+    border:none;
+
+
+}
+
+
+
+
+
+/* دکمه واتساپ */
+
+
+.whatsapp-btn{
+
+
+    width:100%;
+
+
+    border:none;
+
+
+    margin-top:30px;
+
+
+    padding:18px;
+
+
+    border-radius:18px;
+
+
+    background:#25D366;
+
+
+    color:white;
+
+
+    font-size:18px;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+    box-shadow:
+
+
+    0 15px 30px rgba(37,211,102,.35);
+
+
+    transition:.25s;
+
+
+}
+
+
+
+.whatsapp-btn:hover{
+
+
+    transform:
+
+    translateY(-4px);
+
+
+}
+
+
+
+
+
+/* پیام انتقال */
+
+
+.redirect-message{
+
+
+    display:none;
+
+
+    margin-top:15px;
+
+
+    color:#666;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+
+/* سفارش جدید */
+
+
+.new-order-btn{
+
+
+    width:100%;
+
+
+    margin-top:20px;
+
+
+    padding:14px;
+
+
+    border-radius:16px;
+
+
+    border:1px solid #ddd;
+
+
+    background:white;
+
+
+    color:#555;
+
+
+    font-size:15px;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+
+.new-order-btn:hover{
+
+
+    background:#f5f5f5;
+
 
 }
