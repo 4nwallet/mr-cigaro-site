@@ -9,7 +9,17 @@
 
 body{
 
-    background:#f7f7f5;
+    background:
+
+linear-gradient(
+
+180deg,
+
+#fdfcf9 0%,
+
+#f5f2eb 100%
+
+);
     color:#222;
 
 }
@@ -29,12 +39,17 @@ body{
 
 .logo{
 
-    width:130px;
+    width:140px;
 
     margin-bottom:20px;
 
-}
+    filter:
 
+    drop-shadow(
+        0 10px 18px rgba(0,0,0,.18)
+    );
+
+}
 h1{
 
     font-size:30px;
@@ -57,18 +72,25 @@ h1{
 
 .timer-box{
 
-    background:white;
+    background:rgba(255,255,255,.75);
 
-    border-radius:20px;
+    backdrop-filter:blur(12px);
 
-    padding:25px;
+    -webkit-backdrop-filter:blur(12px);
 
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    border:1px solid rgba(255,255,255,.4);
+
+    border-radius:22px;
+
+    padding:30px;
 
     margin-bottom:35px;
 
-}
+    box-shadow:
 
+    0 15px 40px rgba(0,0,0,.08);
+
+}
 
 .timer-title{
 
@@ -128,12 +150,15 @@ h1{
 ✅ پس از ارسال پیام، منتظر تأیید سفارش بمانید.
 
 </div>
-
 .whatsapp-btn{
 
     display:block;
 
     margin-top:35px;
+
+    padding:18px;
+
+    border-radius:18px;
 
     background:#25D366;
 
@@ -141,20 +166,60 @@ h1{
 
     text-decoration:none;
 
-    padding:18px;
-
-    border-radius:16px;
-
-    font-size:18px;
+    font-size:19px;
 
     font-weight:700;
 
     transition:.25s;
 
-}
+    box-shadow:
+
+    0 12px 25px rgba(37,211,102,.35);
+
+}}
 
 .whatsapp-btn:hover{
 
-    transform:translateY(-3px);
+    transform:
+
+    translateY(-4px)
+    scale(1.02);
+
+    box-shadow:
+
+    0 18px 35px rgba(37,211,102,.45);
+
+}}
+
+
+/* ========================= */
+/* Animation */
+/* ========================= */
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.04);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+#countdown{
+
+    animation:pulse 1.8s infinite;
 
 }
