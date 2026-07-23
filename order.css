@@ -51,20 +51,18 @@ body{
 
 .logo{
 
+    width:200px;
 
-    width:140px;
+    max-width:70%;
 
-    margin-bottom:20px;
+    margin-bottom:25px;
 
     filter:
-
     drop-shadow(
     0 10px 18px rgba(0,0,0,.15)
     );
 
-
 }
-
 
 
 h1{
