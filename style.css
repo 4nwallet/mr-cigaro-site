@@ -6,8 +6,8 @@
 
 body {
     font-family: Tahoma, Arial, sans-serif;
-    background: #111111;
-    color: #f5e6c8;
+    background: #F8F6F2;
+    color: #222222;
     min-height: 100vh;
 }
 
@@ -21,7 +21,7 @@ main {
 /* بخش اصلی شبیه کارت ویزیت */
 
 .hero {
-    background: #1c1c1c;
+    background: #FFFFFF;
     border: 1px solid rgba(212,175,55,0.35);
     border-radius: 24px;
     padding: 45px 25px;
@@ -50,7 +50,7 @@ main {
 h1 {
     font-size: 28px;
     line-height: 1.8;
-    color: #f5e6c8;
+    color: #222222;
     margin-bottom: 20px;
 }
 
@@ -104,7 +104,7 @@ button {
 
 .menu-card{
 
-    background:#1c1c1c;
+    background:#FFFFFF;
     border:1px solid rgba(212,175,55,.25);
     border-radius:22px;
     padding:28px 18px;
@@ -135,7 +135,7 @@ button {
 
 .menu-card h3{
 
-    color:#f5e6c8;
+    color:#222222;
     font-size:18px;
     font-weight:normal;
 
@@ -165,7 +165,7 @@ button {
 
 #next-delivery {
 
-    color: #f5e6c8;
+    color: #222222;
     font-size: 18px;
     line-height: 2;
     margin-bottom: 8px;
