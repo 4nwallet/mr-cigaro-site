@@ -69,6 +69,18 @@ h1{
 
 }
 
+
+.timer-title{
+
+    font-size:16px;
+
+    color:#666;
+
+    margin-bottom:15px;
+
+    font-weight:600;
+
+}
 #countdown{
 
     font-size:42px;
@@ -81,47 +93,41 @@ h1{
 
 }
 
-.steps{
+<h2>
 
-    text-align:right;
+قبل از ارسال پیام، این اطلاعات را آماده کنید
 
-    background:white;
+</h2>
 
-    border-radius:20px;
+<div class="step">
 
-    padding:25px;
+🚬 برند سیگار
 
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+</div>
 
-}
+<div class="step">
 
-.steps h2{
+📦 تعداد موردنیاز
 
-    margin-bottom:20px;
+</div>
 
-    text-align:center;
+<div class="step">
 
-    font-size:22px;
+🏢 نام ساختمان و شماره واحد
 
-}
+</div>
 
-.step{
+<div class="step">
 
-    padding:12px 0;
+📱 شماره تماس
 
-    border-bottom:1px solid #ececec;
+</div>
 
-    line-height:1.8;
+<div class="step">
 
-    font-size:16px;
+✅ پس از ارسال پیام، منتظر تأیید سفارش بمانید.
 
-}
-
-.step:last-child{
-
-    border:none;
-
-}
+</div>
 
 .whatsapp-btn{
 
