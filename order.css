@@ -379,37 +379,29 @@ h1{
 
 .new-order-btn{
 
+    display:block;
 
     width:100%;
 
-
     margin-top:20px;
-
 
     padding:14px;
 
-
     border-radius:16px;
-
 
     border:1px solid #ddd;
 
-
     background:white;
-
 
     color:#555;
 
-
     font-size:15px;
 
+    text-decoration:none;
 
     cursor:pointer;
 
-
 }
-
-
 
 
 .new-order-btn:hover{
