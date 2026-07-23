@@ -18,6 +18,8 @@ function updateDeliveryTimer(){
     const now = new Date();
 
     let targetTime;
+let fixedTargetTime = null;
+    
 
 
 
@@ -33,17 +35,23 @@ function updateDeliveryTimer(){
 
 
     // زمان فعالیت روزانه
-    else if(
-        now >= createTodayTime(7,30) &&
-        now < createTodayTime(18,0)
-    ){
+else if(
+    now >= createTodayTime(7,30) &&
+    now < createTodayTime(18,0)
+){
 
-        // حداکثر زمان انتظار
-        targetTime = new Date(
+    if(!fixedTargetTime){
+
+        fixedTargetTime = new Date(
             now.getTime() + (90 * 60 * 1000)
         );
 
     }
+
+
+    targetTime = fixedTargetTime;
+
+}
 
 
 
