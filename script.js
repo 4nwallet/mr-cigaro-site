@@ -1,44 +1,61 @@
 const deliverySchedule = [
     {
-        orderUntil: "09:00",
-        delivery: "10:۰۰ تا 11:۰۰"
+        start: "10:00",
+        end: "11:00",
+        label: "امروز ساعت ۱۰:۰۰ تا ۱۱:۰۰"
     },
     {
-        orderUntil: "10:00",
-        delivery: "11:۰۰ تا 12:۰۰"
+        start: "11:00",
+        end: "12:00",
+        label: "امروز ساعت ۱۱:۰۰ تا ۱۲:۰۰"
     },
     {
-        orderUntil: "11:00",
-        delivery: "12:۰۰ تا 13:۰۰"
+        start: "12:00",
+        end: "13:00",
+        label: "امروز ساعت ۱۲:۰۰ تا ۱۳:۰۰"
     },
     {
-        orderUntil: "13:00",
-        delivery: "14:۰۰ تا 15:۰۰"
+        start: "14:00",
+        end: "15:00",
+        label: "امروز ساعت ۱۴:۰۰ تا ۱۵:۰۰"
     },
     {
-        orderUntil: "14:00",
-        delivery: "15:۰۰ تا 16:۰۰"
+        start: "15:00",
+        end: "16:00",
+        label: "امروز ساعت ۱۵:۰۰ تا ۱۶:۰۰"
     },
     {
-        orderUntil: "15:00",
-        delivery: "16:۰۰ تا 17:۰۰"
+        start: "16:00",
+        end: "17:00",
+        label: "امروز ساعت ۱۶:۰۰ تا ۱۷:۰۰"
     },
     {
-        orderUntil: "16:00",
-        delivery: "17:۰۰ تا 18:۰۰"
+        start: "17:00",
+        end: "18:00",
+        label: "امروز ساعت ۱۷:۰۰ تا ۱۸:۰۰"
     }
 ];
 
 
-function convertTime(time) {
 
-    const parts = time.split(":");
+function createTime(time, tomorrow = false){
 
-    const date = new Date();
+    let date = new Date();
+
+    let parts = time.split(":");
 
     date.setHours(parts[0]);
     date.setMinutes(parts[1]);
     date.setSeconds(0);
+    date.setMilliseconds(0);
+
+
+    if(tomorrow){
+
+        date.setDate(date.getDate()+1);
+
+    }
+
 
     return date;
 
@@ -46,21 +63,22 @@ function convertTime(time) {
 
 
 
-function updateDelivery() {
+function updateDelivery(){
 
     const now = new Date();
 
-    let nextDelivery = null;
+
+    let selectedDelivery = null;
 
 
-    for (let item of deliverySchedule) {
+    for(let item of deliverySchedule){
 
-        const deadline = convertTime(item.orderUntil);
+        let endTime = createTime(item.end);
 
 
-        if (now < deadline) {
+        if(now < endTime){
 
-            nextDelivery = item;
+            selectedDelivery = item;
             break;
 
         }
@@ -69,54 +87,112 @@ function updateDelivery() {
 
 
 
-    const deliveryText = document.getElementById("next-delivery");
-    const countdown = document.getElementById("countdown");
+    const deliveryText =
+    document.getElementById("next-delivery");
+
+
+    const countdown =
+    document.getElementById("countdown");
 
 
 
-    if (!nextDelivery) {
+    if(selectedDelivery){
+
 
         deliveryText.innerHTML =
-        "فردا ساعت ۱۰:۰۰ تا ۱۱:۰۰";
+        selectedDelivery.label;
+
+
+
+        let endTime =
+        createTime(selectedDelivery.end);
+
+
+
+        let distance =
+        endTime - now;
+
+
+
+        let hours =
+        Math.floor(
+            distance / (1000 * 60 * 60)
+        );
+
+
+        let minutes =
+        Math.floor(
+            (distance % (1000 * 60 * 60))
+            /
+            (1000 * 60)
+        );
+
+
+        let seconds =
+        Math.floor(
+            (distance % (1000 * 60))
+            /
+            1000
+        );
+
+
 
         countdown.innerHTML =
-        "اولین بازه ارسال فردا";
+        String(hours).padStart(2,"0")
+        + ":" +
+        String(minutes).padStart(2,"0")
+        + ":" +
+        String(seconds).padStart(2,"0");
 
-        return;
 
     }
 
+    else{
 
 
-    deliveryText.innerHTML =
-    "امروز " + nextDelivery.delivery;
-
-
-
-    const endTime = convertTime(nextDelivery.orderUntil);
-
-
-    const distance = endTime - now;
-
-
-    const hours = Math.floor(distance / (1000 * 60 * 60));
-
-    const minutes = Math.floor(
-        (distance % (1000 * 60 * 60)) /
-        (1000 * 60)
-    );
-
-    const seconds = Math.floor(
-        (distance % (1000 * 60)) /
-        1000
-    );
+        deliveryText.innerHTML =
+        "اولین زمان تحویل سفارش شما<br>فردا ساعت ۱۰:۰۰ تا ۱۱:۰۰";
 
 
 
-    countdown.innerHTML =
-    String(hours).padStart(2,"0") + ":" +
-    String(minutes).padStart(2,"0") + ":" +
-    String(seconds).padStart(2,"0");
+        let tomorrowEnd =
+        createTime("11:00", true);
+
+
+
+        let distance =
+        tomorrowEnd - now;
+
+
+
+        let hours =
+        Math.floor(
+            distance / (1000*60*60)
+        );
+
+
+        let minutes =
+        Math.floor(
+            (distance % (1000*60*60))
+            /(1000*60)
+        );
+
+
+        let seconds =
+        Math.floor(
+            (distance % (1000*60))
+            /1000
+        );
+
+
+        countdown.innerHTML =
+        String(hours).padStart(2,"0")
+        + ":" +
+        String(minutes).padStart(2,"0")
+        + ":" +
+        String(seconds).padStart(2,"0");
+
+    }
 
 }
 
