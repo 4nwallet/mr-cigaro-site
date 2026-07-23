@@ -6,7 +6,7 @@
 
 body {
     font-family: Tahoma, Arial, sans-serif;
-    background: #1b1713;
+    background: #111111;
     color: #f5e6c8;
     min-height: 100vh;
 }
@@ -21,7 +21,7 @@ main {
 /* بخش اصلی شبیه کارت ویزیت */
 
 .hero {
-    background: #241d17;
+    background: #1c1c1c;
     border: 1px solid rgba(212,175,55,0.35);
     border-radius: 24px;
     padding: 45px 25px;
@@ -104,7 +104,7 @@ button {
 
 .menu-card{
 
-    background:#241d17;
+    background:#1c1c1c;
     border:1px solid rgba(212,175,55,.25);
     border-radius:22px;
     padding:28px 18px;
