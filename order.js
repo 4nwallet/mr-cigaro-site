@@ -299,19 +299,6 @@ function(){
 // ===============================
 
 
-newOrderBtn.addEventListener(
-"click",
-function(){
-
-
-    localStorage.removeItem(ORDER_KEY);
-
-
-    location.reload();
-
-
-});
-
 
 
 
