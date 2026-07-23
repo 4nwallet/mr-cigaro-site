@@ -1,203 +1,133 @@
-const deliverySchedule = [
-    {
-        start: "10:00",
-        end: "11:00",
-        label: "امروز ساعت ۱۰:۰۰ تا ۱۱:۰۰"
-    },
-    {
-        start: "11:00",
-        end: "12:00",
-        label: "امروز ساعت ۱۱:۰۰ تا ۱۲:۰۰"
-    },
-    {
-        start: "12:00",
-        end: "13:00",
-        label: "امروز ساعت ۱۲:۰۰ تا ۱۳:۰۰"
-    },
-    {
-        start: "14:00",
-        end: "15:00",
-        label: "امروز ساعت ۱۴:۰۰ تا ۱۵:۰۰"
-    },
-    {
-        start: "15:00",
-        end: "16:00",
-        label: "امروز ساعت ۱۵:۰۰ تا ۱۶:۰۰"
-    },
-    {
-        start: "16:00",
-        end: "17:00",
-        label: "امروز ساعت ۱۶:۰۰ تا ۱۷:۰۰"
-    },
-    {
-        start: "17:00",
-        end: "18:00",
-        label: "امروز ساعت ۱۷:۰۰ تا ۱۸:۰۰"
-    }
-];
+function createTodayTime(hour, minute = 0){
 
+    let time = new Date();
 
+    time.setHours(hour);
+    time.setMinutes(minute);
+    time.setSeconds(0);
+    time.setMilliseconds(0);
 
-function createTime(time, tomorrow = false){
-
-    let date = new Date();
-
-    let parts = time.split(":");
-
-    date.setHours(parts[0]);
-    date.setMinutes(parts[1]);
-    date.setSeconds(0);
-    date.setMilliseconds(0);
-
-
-    if(tomorrow){
-
-        date.setDate(date.getDate()+1);
-
-    }
-
-
-    return date;
+    return time;
 
 }
 
 
 
-function updateDelivery(){
+function updateDeliveryTimer(){
 
     const now = new Date();
 
-
-    let selectedDelivery = null;
-
-
-    for(let item of deliverySchedule){
-
-        let endTime = createTime(item.end);
+    let targetTime;
 
 
-        if(now < endTime){
 
-            selectedDelivery = item;
-            break;
+    // قبل از شروع سرویس
+    if(
+        now < createTodayTime(7,30)
+    ){
 
-        }
+        targetTime = createTodayTime(9,0);
 
     }
 
 
 
-    const deliveryText =
-    document.getElementById("next-delivery");
+    // زمان فعالیت روزانه
+    else if(
+        now >= createTodayTime(7,30) &&
+        now < createTodayTime(18,0)
+    ){
 
-
-    const countdown =
-    document.getElementById("countdown");
-
-
-
-    if(selectedDelivery){
-
-
-        deliveryText.innerHTML =
-        selectedDelivery.label;
-
-
-
-        let endTime =
-        createTime(selectedDelivery.end);
-
-
-
-        let distance =
-        endTime - now;
-
-
-
-        let hours =
-        Math.floor(
-            distance / (1000 * 60 * 60)
+        // حداکثر زمان انتظار
+        targetTime = new Date(
+            now.getTime() + (90 * 60 * 1000)
         );
 
+    }
 
-        let minutes =
-        Math.floor(
-            (distance % (1000 * 60 * 60))
-            /
-            (1000 * 60)
+
+
+    // بعد از پایان سفارش گیری
+    else {
+
+        targetTime = createTodayTime(9,0);
+
+        targetTime.setDate(
+            targetTime.getDate() + 1
         );
 
-
-        let seconds =
-        Math.floor(
-            (distance % (1000 * 60))
-            /
-            1000
-        );
+    }
 
 
 
-        countdown.innerHTML =
+    let distance = targetTime - now;
+
+
+
+    let hours = Math.floor(
+        distance / (1000 * 60 * 60)
+    );
+
+
+    let minutes = Math.floor(
+        (distance % (1000 * 60 * 60))
+        /
+        (1000 * 60)
+    );
+
+
+    let seconds = Math.floor(
+        (distance % (1000 * 60))
+        /
+        1000
+    );
+
+
+
+    document.getElementById("countdown").innerHTML =
         String(hours).padStart(2,"0")
         + ":" +
         String(minutes).padStart(2,"0")
         + ":" +
         String(seconds).padStart(2,"0");
 
+
+
+    let message =
+    document.getElementById("next-delivery");
+
+
+
+    if(now >= createTodayTime(18,0)){
+
+        message.innerHTML =
+        "اولین ارسال فردا از ساعت ۹:۰۰ شروع می‌شود";
+
+    }
+
+    else if(now < createTodayTime(7,30)){
+
+        message.innerHTML =
+        "اولین ارسال امروز از ساعت ۹:۰۰ شروع می‌شود";
 
     }
 
     else{
 
-
-        deliveryText.innerHTML =
-        "اولین زمان تحویل سفارش شما<br>فردا ساعت ۱۰:۰۰ تا ۱۱:۰۰";
-
-
-
-        let tomorrowEnd =
-        createTime("11:00", true);
-
-
-
-        let distance =
-        tomorrowEnd - now;
-
-
-
-        let hours =
-        Math.floor(
-            distance / (1000*60*60)
-        );
-
-
-        let minutes =
-        Math.floor(
-            (distance % (1000*60*60))
-            /(1000*60)
-        );
-
-
-        let seconds =
-        Math.floor(
-            (distance % (1000*60))
-            /1000
-        );
-
-
-        countdown.innerHTML =
-        String(hours).padStart(2,"0")
-        + ":" +
-        String(minutes).padStart(2,"0")
-        + ":" +
-        String(seconds).padStart(2,"0");
+        message.innerHTML =
+        "سفارش شما در سریع‌ترین زمان ممکن ارسال می‌شود";
 
     }
+
 
 }
 
 
 
-updateDelivery();
+updateDeliveryTimer();
 
-setInterval(updateDelivery,1000);
+
+setInterval(
+    updateDeliveryTimer,
+    1000
+);
