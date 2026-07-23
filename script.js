@@ -1,3 +1,6 @@
+let targetTime = null;
+
+
 function createTodayTime(hour, minute = 0){
 
     let time = new Date();
@@ -13,62 +16,67 @@ function createTodayTime(hour, minute = 0){
 
 
 
-function updateDeliveryTimer(){
+function getTargetTime(){
 
     const now = new Date();
 
-    let targetTime;
-let fixedTargetTime = null;
-    
-
-
 
     // قبل از شروع سرویس
+    if(now < createTodayTime(7,30)){
+
+        let start = createTodayTime(9,0);
+
+        return start;
+
+    }
+
+
+
+    // زمان فعال سرویس
     if(
-        now < createTodayTime(7,30)
+        now >= createTodayTime(7,30) &&
+        now < createTodayTime(18,0)
     ){
 
-        targetTime = createTodayTime(9,0);
+        // فقط یک بار زمان هدف ساخته شود
+        if(!targetTime){
+
+            targetTime = new Date(
+                now.getTime() + (90 * 60 * 1000)
+            );
+
+        }
+
+
+        return targetTime;
 
     }
 
 
 
-    // زمان فعالیت روزانه
-else if(
-    now >= createTodayTime(7,30) &&
-    now < createTodayTime(18,0)
-){
+    // بعد از پایان سرویس
+    let tomorrow = createTodayTime(9,0);
 
-    if(!fixedTargetTime){
-
-        fixedTargetTime = new Date(
-            now.getTime() + (90 * 60 * 1000)
-        );
-
-    }
+    tomorrow.setDate(
+        tomorrow.getDate() + 1
+    );
 
 
-    targetTime = fixedTargetTime;
+    return tomorrow;
 
 }
 
 
 
-    // بعد از پایان سفارش گیری
-    else {
 
-        targetTime = createTodayTime(9,0);
+function updateDeliveryTimer(){
 
-        targetTime.setDate(
-            targetTime.getDate() + 1
-        );
+    const now = new Date();
 
-    }
+    const endTime = getTargetTime();
 
 
-
-    let distance = targetTime - now;
+    let distance = endTime - now;
 
 
 
@@ -91,7 +99,6 @@ else if(
     );
 
 
-
     document.getElementById("countdown").innerHTML =
         String(hours).padStart(2,"0")
         + ":" +
@@ -101,32 +108,29 @@ else if(
 
 
 
-    let message =
-    document.getElementById("next-delivery");
+    let text = document.getElementById("next-delivery");
 
 
+    if(now < createTodayTime(7,30)){
 
-    if(now >= createTodayTime(18,0)){
-
-        message.innerHTML =
-        "اولین ارسال فردا از ساعت ۹:۰۰ شروع می‌شود";
+        text.innerHTML =
+        "اولین ارسال امروز از ساعت ۹:۰۰ شروع می‌شود";
 
     }
 
-    else if(now < createTodayTime(7,30)){
+    else if(now >= createTodayTime(18,0)){
 
-        message.innerHTML =
-        "اولین ارسال امروز از ساعت ۹:۰۰ شروع می‌شود";
+        text.innerHTML =
+        "اولین ارسال فردا از ساعت ۹:۰۰ شروع می‌شود";
 
     }
 
     else{
 
-        message.innerHTML =
+        text.innerHTML =
         "سفارش شما در سریع‌ترین زمان ممکن ارسال می‌شود";
 
     }
-
 
 }
 
