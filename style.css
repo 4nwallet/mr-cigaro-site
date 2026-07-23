@@ -143,25 +143,34 @@ button {
 
 .delivery-box {
 
-    margin-top: 25px;
-    margin-bottom: 25px;
-    background: rgba(212,175,55,0.08);
-    border: 1px solid rgba(212,175,55,0.35);
-    border-radius: 20px;
-    padding: 22px 15px;
+    margin-top: 30px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    padding: 25px 18px;
+
     text-align: center;
+
+    border: 1px solid #eeeeee;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 
 }
 
 
 .delivery-box h3 {
 
-    color: #d4af37;
+    color: #222222;
+
     font-size: 20px;
-    margin-bottom: 12px;
+
+    line-height: 1.8;
+
+    margin-bottom: 15px;
 
 }
-
 
 #next-delivery {
 
@@ -175,14 +184,17 @@ button {
 
 #countdown {
 
-    color: #d4af37;
-    font-size: 36px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin: 12px 0;
+    color: #D4AF37;
+
+    font-size: 40px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    margin: 15px 0;
 
 }
-
 
 .delivery-box span {
 
@@ -192,5 +204,34 @@ button {
 }
 
 
+.order-btn {
 
+    display: block;
+    width: 100%;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+
+    padding: 16px;
+    border-radius: 14px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    box-shadow: 0 8px 20px rgba(37,211,102,0.25);
+
+    transition: .3s;
+
+}
+
+
+.order-btn:hover {
+
+    transform: translateY(-3px);
+
+}
 
