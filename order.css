@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Vazirmatn',sans-serif;
+}
+
+body{
+
+    background:#f7f7f5;
+    color:#222;
+
+}
+
+.container{
+
+    max-width:480px;
+    margin:auto;
+
+    min-height:100vh;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+}
+
+.logo{
+
+    width:130px;
+
+    margin-bottom:20px;
+
+}
+
+h1{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.subtitle{
+
+    color:#666;
+
+    font-size:16px;
+
+    margin-bottom:30px;
+
+}
+
+.timer-box{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    margin-bottom:35px;
+
+}
+
+#countdown{
+
+    font-size:42px;
+
+    font-weight:800;
+
+    color:#1b5e20;
+
+    letter-spacing:2px;
+
+}
+
+.steps{
+
+    text-align:right;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.steps h2{
+
+    margin-bottom:20px;
+
+    text-align:center;
+
+    font-size:22px;
+
+}
+
+.step{
+
+    padding:12px 0;
+
+    border-bottom:1px solid #ececec;
+
+    line-height:1.8;
+
+    font-size:16px;
+
+}
+
+.step:last-child{
+
+    border:none;
+
+}
+
+.whatsapp-btn{
+
+    display:block;
+
+    margin-top:35px;
+
+    background:#25D366;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:18px;
+
+    border-radius:16px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.whatsapp-btn:hover{
+
+    transform:translateY(-3px);
+
+}
