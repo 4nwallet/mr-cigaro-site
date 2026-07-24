@@ -70,6 +70,9 @@ document.getElementById("payment-owner");
 const copyHint =
 document.getElementById("copy-hint");
 
+const copyCardBtn =
+document.getElementById("copy-card-btn");
+
 // ======================================
 // ساخت ساعت امروز
 // ======================================
@@ -728,12 +731,56 @@ if(paymentOwner){
 // کپی شماره کارت
 // ======================================
 
-if(paymentCard && copyHint){
+if(copyCardBtn && copyHint){
 
 
-    paymentCard.addEventListener(
+    copyCardBtn.addEventListener(
 
     "click",
+
+    function(){
+
+
+        navigator.clipboard.writeText(
+
+            PAYMENT_CARD
+
+        );
+
+
+        copyCardBtn.innerHTML =
+
+        "✅ کپی شد";
+
+
+
+        copyHint.innerHTML =
+
+        "شماره کارت آماده پرداخت است";
+
+
+
+        setTimeout(()=>{
+
+
+            copyCardBtn.innerHTML =
+
+            "📋 کپی شماره کارت";
+
+
+            copyHint.innerHTML =
+
+            "برای پرداخت، شماره کارت را کپی کنید";
+
+
+        },2000);
+
+
+
+    });
+
+
+}
 
     function(){
 
