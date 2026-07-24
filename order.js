@@ -782,38 +782,7 @@ if(copyCardBtn && copyHint){
 
 }
 
-    function(){
 
-
-        navigator.clipboard.writeText(
-
-            PAYMENT_CARD
-
-        );
-
-
-        copyHint.innerHTML =
-
-        "✅ شماره کارت کپی شد";
-
-
-
-        setTimeout(()=>{
-
-
-            copyHint.innerHTML =
-
-            "👆 برای کپی کردن شماره کارت، روی آن بزنید";
-
-
-        },2000);
-
-
-
-    });
-
-
-}
 
 
 // ======================================
