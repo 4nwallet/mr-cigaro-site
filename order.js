@@ -1,37 +1,33 @@
 // ======================================
-// تنظیمات
+// تنظیمات اصلی
 // ======================================
 
-const INITIAL_TIME = 90 * 60;      // 90 دقیقه
-const SAVE_TIME = 30 * 60;         // 30 دقیقه
+const INITIAL_TIME = 90 * 60; // 90 دقیقه
+
+const WHATSAPP_ACTIVE_TIME = 30 * 60; // 30 دقیقه
 
 const ORDER_KEY = "mrCigaroOrder";
 
 
 
 // ======================================
-// ساعت های کاری
+// ساعت ها
 // ======================================
 
-const SERVICE_START = {
-    hour: 7,
-    minute: 30
-};
+const SERVICE_START_HOUR = 7;
+const SERVICE_START_MINUTE = 30;
 
-const SERVICE_END = {
-    hour: 18,
-    minute: 0
-};
 
-const LAST_ORDER = {
-    hour: 18,
-    minute: 30
-};
+const SERVICE_END_HOUR = 18;
+const SERVICE_END_MINUTE = 0;
 
-const FIRST_DELIVERY = {
-    hour: 9,
-    minute: 0
-};
+
+const LAST_ORDER_HOUR = 18;
+const LAST_ORDER_MINUTE = 30;
+
+
+const FIRST_DELIVERY_HOUR = 9;
+const FIRST_DELIVERY_MINUTE = 0;
 
 
 
@@ -42,11 +38,14 @@ const FIRST_DELIVERY = {
 const countdown =
 document.getElementById("countdown");
 
+
 const whatsappBtn =
 document.getElementById("whatsapp-btn");
 
+
 const redirectMessage =
 document.getElementById("redirect-message");
+
 
 const statusBox =
 document.getElementById("status-box");
@@ -54,205 +53,191 @@ document.getElementById("status-box");
 
 
 // ======================================
-// اطلاعات سفارش
+// ساخت ساعت امروز
 // ======================================
 
-let orderData =
-JSON.parse(
-localStorage.getItem(ORDER_KEY)
-);
+function createTodayTime(hour, minute){
 
 
+    let time = new Date();
 
-// ======================================
-// ساخت زمان
-// ======================================
 
-function createTime(hour, minute){
+    time.setHours(hour);
 
-    let d = new Date();
+    time.setMinutes(minute);
 
-    d.setHours(hour);
+    time.setSeconds(0);
 
-    d.setMinutes(minute);
+    time.setMilliseconds(0);
 
-    d.setSeconds(0);
 
-    d.setMilliseconds(0);
-
-    return d;
+    return time;
 
 }
 
 
 
 // ======================================
-// وضعیت ساعت
-// ======================================
-
-function isServiceOpen(){
-
-    const now = new Date();
-
-    return (
-
-        now >= createTime(
-
-            SERVICE_START.hour,
-
-            SERVICE_START.minute
-
-        )
-
-        &&
-
-        now < createTime(
-
-            SERVICE_END.hour,
-
-            SERVICE_END.minute
-
-        )
-
-    );
-
-}
-
-
-
-function isLastOrderExpired(){
-
-    const now = new Date();
-
-    return now >= createTime(
-
-        LAST_ORDER.hour,
-
-        LAST_ORDER.minute
-
-    );
-
-}
-
-
-
-// ======================================
-// زمان باقی مانده تا 9 صبح
-// ======================================
-
-function getSecondsUntilNine(){
-
-    const now = new Date();
-
-    let target;
-
-    if(
-
-        now <
-
-        createTime(
-
-            SERVICE_START.hour,
-
-            SERVICE_START.minute
-
-        )
-
-    ){
-
-        target =
-
-        createTime(
-
-            FIRST_DELIVERY.hour,
-
-            FIRST_DELIVERY.minute
-
-        );
-
-    }
-
-    else{
-
-        target =
-
-        createTime(
-
-            FIRST_DELIVERY.hour,
-
-            FIRST_DELIVERY.minute
-
-        );
-
-        target.setDate(
-
-            target.getDate()+1
-
-        );
-
-    }
-
-    return Math.floor(
-
-        (
-
-            target-now
-
-        )/1000
-
-    );
-
-}
-
-
-
-// ======================================
-// تبدیل ثانیه
+// فرمت تایمر
 // ======================================
 
 function formatTime(seconds){
 
-    let h = Math.floor(seconds/3600);
 
-    let m = Math.floor(
+    let hours =
+    Math.floor(seconds / 3600);
 
-        (seconds%3600)/60
 
+
+    let minutes =
+    Math.floor(
+        (seconds % 3600) / 60
     );
 
-    let s = seconds%60;
+
+
+    let secs =
+    seconds % 60;
+
+
 
     return (
 
-        String(h).padStart(2,"0")
-
-        + ":"
+        String(hours).padStart(2,"0")
 
         +
 
-        String(m).padStart(2,"0")
-
-        + ":"
+        ":"
 
         +
 
-        String(s).padStart(2,"0")
+        String(minutes).padStart(2,"0")
+
+        +
+
+        ":"
+
+        +
+
+        String(secs).padStart(2,"0")
 
     );
+
+
+}
+
+
+
+// ======================================
+// بررسی ساعت سرویس
+// ======================================
+
+function isServiceActive(){
+
+
+    const now = new Date();
+
+
+
+    return (
+
+        now >= createTodayTime(
+            SERVICE_START_HOUR,
+            SERVICE_START_MINUTE
+        )
+
+        &&
+
+        now < createTodayTime(
+            SERVICE_END_HOUR,
+            SERVICE_END_MINUTE
+        )
+
+    );
+
+
+}
+
+
+
+// ======================================
+// پایان زمان سفارش امروز
+// ======================================
+
+function isOrderClosed(){
+
+
+    const now = new Date();
+
+
+    return now >= createTodayTime(
+        LAST_ORDER_HOUR,
+        LAST_ORDER_MINUTE
+    );
+
 
 }
 
 // ======================================
-// تایمر اولیه صفحه
+// گرفتن زمان باقی مانده تا 9 صبح
 // ======================================
 
-function startPreviewTimer(){
+function getTimeUntilFirstDelivery(){
+
+
+    const now = new Date();
+
+
+    let target = createTodayTime(
+
+        FIRST_DELIVERY_HOUR,
+
+        FIRST_DELIVERY_MINUTE
+
+    );
+
+
+
+    // اگر از 9 صبح گذشته باشد
+    // اولین تحویل فردا است
+
+    if(now >= target){
+
+
+        target.setDate(
+
+            target.getDate() + 1
+
+        );
+
+
+    }
+
+
+
+    return Math.floor(
+
+        (target - now) / 1000
+
+    );
+
+
+}
+
+
+
+// ======================================
+// تایمر عادی صفحه
+// ======================================
+
+function startNormalTimer(){
 
 
     let remaining;
 
 
-    if(isServiceOpen()){
+
+    if(isServiceActive()){
 
 
         remaining = INITIAL_TIME;
@@ -263,26 +248,28 @@ function startPreviewTimer(){
     else{
 
 
-        remaining = getSecondsUntilNine();
+        remaining = getTimeUntilFirstDelivery();
 
 
     }
 
 
 
-    const timer = setInterval(()=>{
+
+    setInterval(()=>{
 
 
-        // اگر سفارش ثبت شده باشد
-        // تایمر اولیه متوقف شود
 
-        if(orderData){
+        // اگر سفارش واتساپ ثبت شده باشد
 
-            clearInterval(timer);
+        if(localStorage.getItem(ORDER_KEY)){
+
 
             return;
 
+
         }
+
 
 
 
@@ -290,9 +277,12 @@ function startPreviewTimer(){
 
 
 
-        // در ساعات کاری
 
-        if(isServiceOpen()){
+
+        // در ساعات فعال
+
+        if(isServiceActive()){
+
 
 
             if(remaining <= 0){
@@ -307,27 +297,29 @@ function startPreviewTimer(){
         }
 
 
-        // خارج از ساعات کاری
+
+
+
+        // خارج از ساعات فعال
 
         else{
 
 
-            if(remaining <= 0){
 
+            remaining =
 
-                remaining = getSecondsUntilNine();
-
-
-            }
+            getTimeUntilFirstDelivery();
 
 
         }
 
 
 
+
         countdown.innerHTML =
 
         formatTime(remaining);
+
 
 
 
@@ -343,26 +335,39 @@ function startPreviewTimer(){
 // تایمر بعد از کلیک واتساپ
 // ======================================
 
-function startOrderTimer(){
+function startWhatsappTimer(){
 
 
-    const timer = setInterval(()=>{
 
+    let orderData =
 
-        if(!orderData){
+    JSON.parse(
 
+        localStorage.getItem(ORDER_KEY)
 
-            clearInterval(timer);
-
-            return;
-
-
-        }
+    );
 
 
 
 
-        let orderAge = Math.floor(
+
+    if(!orderData){
+
+
+        return;
+
+
+    }
+
+
+
+
+
+    setInterval(()=>{
+
+
+
+        let passed = Math.floor(
 
 
             (
@@ -371,7 +376,7 @@ function startOrderTimer(){
 
                 -
 
-                orderData.startTime
+                orderData.clickTime
 
 
             )
@@ -387,9 +392,9 @@ function startOrderTimer(){
 
 
 
-        // اگر از 30 دقیقه گذشته باشد
+        // بعد از 30 دقیقه
 
-        if(orderAge >= SAVE_TIME){
+        if(passed >= WHATSAPP_ACTIVE_TIME){
 
 
 
@@ -400,10 +405,9 @@ function startOrderTimer(){
             );
 
 
-            clearInterval(timer);
-
 
             location.reload();
+
 
 
             return;
@@ -417,15 +421,15 @@ function startOrderTimer(){
 
         let remaining =
 
-        INITIAL_TIME - orderAge;
+
+        INITIAL_TIME - passed;
 
 
 
 
-
-        // پایان تایمر 90 دقیقه
 
         if(remaining <= 0){
+
 
 
             localStorage.removeItem(
@@ -435,10 +439,9 @@ function startOrderTimer(){
             );
 
 
-            clearInterval(timer);
-
 
             location.reload();
+
 
 
             return;
@@ -456,21 +459,31 @@ function startOrderTimer(){
 
 
 
+
     },1000);
+
 
 
 }
 
 
 
-
-
-
 // ======================================
-// کنترل وضعیت صفحه
+// تغییر وضعیت صفحه
 // ======================================
 
-function checkPageStatus(){
+function updateStatus(){
+
+
+
+    if(!statusBox){
+
+
+        return;
+
+
+    }
+
 
 
 
@@ -480,17 +493,13 @@ function checkPageStatus(){
 
 
 
-    // قبل از شروع سرویس
-
     if(
 
-        now <
+        now < createTodayTime(
 
-        createTime(
+            SERVICE_START_HOUR,
 
-            SERVICE_START.hour,
-
-            SERVICE_START.minute
+            SERVICE_START_MINUTE
 
         )
 
@@ -498,15 +507,9 @@ function checkPageStatus(){
 
 
 
-        if(statusBox){
+        statusBox.innerHTML =
 
-
-            statusBox.innerHTML =
-
-            "🟡 اولین ارسال امروز از ساعت ۹:۰۰ شروع می‌شود";
-
-
-        }
+        "🟡 اولین ارسال امروز از ساعت ۹:۰۰ شروع می‌شود";
 
 
 
@@ -519,26 +522,18 @@ function checkPageStatus(){
 
 
 
-    // بعد از پایان زمان ثبت سفارش
-
-    if(isLastOrderExpired()){
+    if(isOrderClosed()){
 
 
 
-        if(statusBox){
+        statusBox.innerHTML =
 
-
-            statusBox.innerHTML =
-
-            "🔴 زمان ثبت سفارش امروز به پایان رسیده است";
-
-
-        }
-
+        "🔴 زمان ثبت سفارش امروز به پایان رسیده است";
 
 
 
         if(whatsappBtn){
+
 
 
             whatsappBtn.disabled = true;
@@ -555,6 +550,8 @@ function checkPageStatus(){
         }
 
 
+
+
         return;
 
 
@@ -564,23 +561,16 @@ function checkPageStatus(){
 
 
 
-    // حالت عادی
+    statusBox.innerHTML =
 
-    if(statusBox){
+    "🟢 آماده دریافت سفارش";
 
-
-        statusBox.innerHTML =
-
-        "🟢 آماده دریافت سفارش";
-
-
-    }
 
 
 }
 
 // ======================================
-// کلیک روی ثبت سفارش واتساپ
+// کلیک روی دکمه واتساپ
 // ======================================
 
 if(whatsappBtn){
@@ -594,15 +584,13 @@ if(whatsappBtn){
 
 
 
-        // اگر زمان ثبت سفارش گذشته باشد
+        // اگر زمان سفارش تمام شده باشد
 
-        if(isLastOrderExpired()){
+        if(isOrderClosed()){
 
 
 
-            statusBox.innerHTML =
-
-            "🔴 زمان ثبت سفارش امروز به پایان رسیده است";
+            updateStatus();
 
 
             return;
@@ -613,33 +601,24 @@ if(whatsappBtn){
 
 
 
-
-        // ذخیره زمان کلیک
-
-        if(!orderData){
+        let orderData = {
 
 
-
-            orderData = {
-
-
-                startTime: Date.now()
+            clickTime: Date.now()
 
 
-            };
+        };
 
 
 
-            localStorage.setItem(
 
-                ORDER_KEY,
+        localStorage.setItem(
 
-                JSON.stringify(orderData)
+            ORDER_KEY,
 
-            );
+            JSON.stringify(orderData)
 
-
-        }
+        );
 
 
 
@@ -648,13 +627,13 @@ if(whatsappBtn){
         if(redirectMessage){
 
 
+
             redirectMessage.style.display =
 
             "block";
 
 
         }
-
 
 
 
@@ -709,21 +688,25 @@ if(whatsappBtn){
 
 
 
-
 // ======================================
-// شروع صفحه
+// شروع برنامه
 // ======================================
 
-checkPageStatus();
+
+updateStatus();
 
 
 
 
+if(
 
-if(orderData){
+    localStorage.getItem(ORDER_KEY)
+
+){
 
 
-    startOrderTimer();
+    startWhatsappTimer();
+
 
 
 }
@@ -731,7 +714,8 @@ if(orderData){
 else{
 
 
-    startPreviewTimer();
+    startNormalTimer();
+
 
 
 }
@@ -740,13 +724,14 @@ else{
 
 
 // ======================================
-// بروزرسانی وضعیت
+// بررسی وضعیت هر 10 ثانیه
 // ======================================
 
 setInterval(()=>{
 
 
-    checkPageStatus();
+    updateStatus();
+
 
 
 },10000);
