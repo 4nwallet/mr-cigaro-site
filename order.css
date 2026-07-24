@@ -509,3 +509,23 @@ h1{
     transform:scale(0.97);
 
 }
+
+/* ===========================
+   WhatsApp Note
+=========================== */
+
+.whatsapp-note{
+
+    text-align:center;
+
+    font-size:14px;
+
+    color:#666;
+
+    margin-top:12px;
+
+    margin-bottom:18px;
+
+    line-height:1.8;
+
+}
