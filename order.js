@@ -8,6 +8,15 @@ const WHATSAPP_ACTIVE_TIME = 30 * 60; // 30 دقیقه
 
 const ORDER_KEY = "mrCigaroOrder";
 
+// ======================================
+// اطلاعات قابل تغییر
+// ======================================
+
+const PAYMENT_CARD = "6037 0000 0000 0000";
+
+const PAYMENT_OWNER = "نام صاحب کارت";
+
+const WHATSAPP_NUMBER = "98912XXXXXXXX";
 
 
 // ======================================
@@ -50,7 +59,16 @@ document.getElementById("redirect-message");
 const statusBox =
 document.getElementById("status-box");
 
+const paymentCard =
+document.getElementById("payment-card");
 
+
+const paymentOwner =
+document.getElementById("payment-owner");
+
+
+const copyHint =
+document.getElementById("copy-hint");
 
 // ======================================
 // ساخت ساعت امروز
@@ -666,7 +684,7 @@ if(whatsappBtn){
             window.location.href =
 
 
-            "https://wa.me/98XXXXXXXXXX?text="
+            "https://wa.me/" + WHATSAPP_NUMBER + "?text="
 
             +
 
@@ -685,7 +703,70 @@ if(whatsappBtn){
 
 }
 
+// ======================================
+// نمایش اطلاعات پرداخت
+// ======================================
 
+if(paymentCard){
+
+    paymentCard.innerHTML =
+    PAYMENT_CARD;
+
+}
+
+
+if(paymentOwner){
+
+    paymentOwner.innerHTML =
+    "به نام: " + PAYMENT_OWNER;
+
+}
+
+
+
+// ======================================
+// کپی شماره کارت
+// ======================================
+
+if(paymentCard && copyHint){
+
+
+    paymentCard.addEventListener(
+
+    "click",
+
+    function(){
+
+
+        navigator.clipboard.writeText(
+
+            PAYMENT_CARD
+
+        );
+
+
+        copyHint.innerHTML =
+
+        "✅ شماره کارت کپی شد";
+
+
+
+        setTimeout(()=>{
+
+
+            copyHint.innerHTML =
+
+            "👆 برای کپی کردن شماره کارت، روی آن بزنید";
+
+
+        },2000);
+
+
+
+    });
+
+
+}
 
 
 // ======================================
