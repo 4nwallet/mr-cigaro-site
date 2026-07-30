@@ -6,109 +6,106 @@
 const productGroups = [
 
 {
-
 brand:"Winston",
 
 products:[
 
 {
-
-name:"Winston Light",
-
+name:"Winston XStyle",
 price:220000,
-
-image:"images/products/winston-light.jpg",
-
+image:"images/products/winston-xstyle.jpg",
 available:true,
-
 show:true
-
-},
-
-{
-
-name:"Winston Ultra",
-
-price:220000,
-
-image:"images/products/winston-ultra.jpg",
-
-available:true,
-
-show:true
-
 }
 
 ]
 
 },
 
-{
 
+{
 brand:"Marlboro",
 
 products:[
 
 {
-
 name:"Marlboro Gold Touch",
-
 price:240000,
-
 image:"images/products/marlboro-gold-touch.jpg",
-
 available:true,
-
 show:true
-
 }
 
 ]
 
 },
 
-{
 
+{
+brand:"Kent",
+
+products:[
+
+{
+name:"Kent Nano",
+price:230000,
+image:"images/products/kent-nano.jpg",
+available:true,
+show:true
+}
+
+]
+
+},
+
+
+{
 brand:"Napoli",
 
 products:[
 
 {
-
 name:"Napoli",
-
 price:200000,
-
 image:"images/products/napoli.jpg",
-
 available:true,
-
 show:true
-
 }
 
 ]
 
 },
 
-{
 
-brand:"Compact",
+{
+brand:"Camel",
 
 products:[
 
 {
-
-name:"Compact",
-
-price:190000,
-
-image:"images/products/compact.jpg",
-
+name:"Camel Blue",
+price:220000,
+image:"images/products/camel-blue.jpg",
 available:true,
-
 show:true
+}
 
+]
+
+},
+
+
+{
+brand:"Esse",
+
+products:[
+
+{
+name:"Esse Change",
+price:210000,
+image:"images/products/esse-change.jpg",
+available:true,
+show:true
 }
 
 ]
@@ -116,9 +113,12 @@ show:true
 }
 
 ];
+
+
 // ======================================
-// از اینجا به بعد چیزی را تغییر نده
+// نمایش محصولات
 // ======================================
+
 
 const container =
 document.getElementById("products-container");
@@ -159,6 +159,7 @@ ${product.name}
 
 </div>
 
+
 ${
 product.available
 
@@ -180,6 +181,7 @@ ${formatPrice(product.price)}
 
 }
 
+
 </div>
 
 </div>
@@ -187,6 +189,7 @@ ${formatPrice(product.price)}
 `;
 
 }
+
 
 
 let html="";
@@ -209,31 +212,9 @@ return;
 
 
 
-const isSingleProduct = visibleProducts.length === 1;
-
-
-
-const hasMoreProducts = visibleProducts.length > 3;
-
-
-
-const productsToShow =
-
-hasMoreProducts
-
-?
-
-visibleProducts.slice(0,3)
-
-:
-
-visibleProducts;
-
-
-
 html+=`
 
-<div class="brand-section ${isSingleProduct ? "single-product" : ""}">
+<div class="brand-section">
 
 
 <div class="brand-title">
@@ -249,39 +230,16 @@ ${group.brand}
 
 
 
-productsToShow.forEach(product=>{
+visibleProducts.forEach(product=>{
 
 html+=createCard(product);
 
 });
 
 
-
 html+=`
 
 </div>
-
-`;
-
-
-
-if(hasMoreProducts){
-
-html+=`
-
-<button class="show-more-products">
-
-نمایش همه محصولات ${group.brand}
-
-</button>
-
-`;
-
-}
-
-
-
-html+=`
 
 </div>
 
@@ -291,7 +249,3 @@ html+=`
 
 
 container.innerHTML=html;
-});
-
-container.innerHTML=html;
-
