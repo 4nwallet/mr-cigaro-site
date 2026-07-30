@@ -16,7 +16,7 @@ price:220000,
 image:"images/products/winston-ultra.jpg",
 available:true,
 show:true
-}
+},
 
 {
 name:"Winston Light",
@@ -24,7 +24,7 @@ price:220000,
 image:"images/products/winston-light.jpg",
 available:true,
 show:true
-}
+},
 
 
 {
@@ -51,12 +51,12 @@ price:240000,
 image:"images/products/marlboro-gold-touch.jpg",
 available:true,
 show:true
-}
+},
 
 {
 name:"Marlboro Flavor",
 price:240000,
-image:"images/products/marlboro-gold-touch.jpg",
+image:"images/products/marlboro-flavor.jpg",
 available:true,
 show:true
 }
