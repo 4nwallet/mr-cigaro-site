@@ -85,9 +85,25 @@ h1{
 
     display:grid;
 
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(3, 1fr);
 
     gap:12px;
+
+}
+
+
+/* برندهایی که فقط یک محصول دارند */
+
+.single-product{
+
+    grid-template-columns:repeat(3, 1fr);
+
+}
+
+
+.single-product .product-card{
+
+    grid-column:1;
 
 }
 
@@ -293,20 +309,13 @@ h1{
 
     .products-grid{
 
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:repeat(3,1fr);
 
-        gap:10px;
-
-    }
-
-    .brand-title{
-
-        font-size:18px;
+        gap:8px;
 
     }
 
 }
-
 
 .single-product{
 
