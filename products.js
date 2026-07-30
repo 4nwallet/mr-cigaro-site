@@ -224,7 +224,7 @@ ${group.brand}
 </div>
 
 
-<div class="products-grid">
+<div class="products-grid ${visibleProducts.length === 1 ? "single-product" : ""}">
 
 `;
 
