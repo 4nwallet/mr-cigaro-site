@@ -11,12 +11,21 @@ brand:"Winston",
 products:[
 
 {
-name:"Winston XStyle",
+name:"Winston Ultra",
 price:220000,
-image:"images/products/winston-xstyle.jpg",
+image:"images/products/winston-ultra.jpg",
 available:true,
 show:true
 }
+
+{
+name:"Winston Light",
+price:220000,
+image:"images/products/winston-light.jpg",
+available:true,
+show:true
+}
+
 
 {
 name:"Winston XStyle",
@@ -24,8 +33,7 @@ price:220000,
 image:"images/products/winston-xstyle.jpg",
 available:true,
 show:true
-}
-
+}  
   
 ]
 
@@ -44,6 +52,15 @@ image:"images/products/marlboro-gold-touch.jpg",
 available:true,
 show:true
 }
+
+{
+name:"Marlboro Flavor",
+price:240000,
+image:"images/products/marlboro-gold-touch.jpg",
+available:true,
+show:true
+}
+  
 
 ]
 
