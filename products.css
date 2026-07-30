@@ -306,3 +306,17 @@ h1{
     }
 
 }
+
+
+.single-product{
+
+    grid-template-columns:1fr 1fr;
+
+}
+
+
+.single-product .product-card{
+
+    grid-column:1;
+
+}
