@@ -18,6 +18,15 @@ available:true,
 show:true
 }
 
+{
+name:"Winston XStyle",
+price:220000,
+image:"images/products/winston-xstyle.jpg",
+available:true,
+show:true
+}
+
+  
 ]
 
 },
