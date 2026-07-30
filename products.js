@@ -116,7 +116,6 @@ show:true
 }
 
 ];
-
 // ======================================
 // از اینجا به بعد چیزی را تغییر نده
 // ======================================
@@ -124,11 +123,13 @@ show:true
 const container =
 document.getElementById("products-container");
 
+
 function formatPrice(price){
 
 return price.toLocaleString("fa-IR")+" تومان";
 
 }
+
 
 function createCard(product){
 
@@ -187,13 +188,18 @@ ${formatPrice(product.price)}
 
 }
 
+
 let html="";
+
 
 productGroups.forEach(group=>{
 
-const visibleProducts=
+
+const visibleProducts =
 
 group.products.filter(p=>p.show);
+
+
 
 if(visibleProducts.length===0){
 
@@ -201,7 +207,34 @@ return;
 
 }
 
+
+
+const isSingleProduct = visibleProducts.length === 1;
+
+
+
+const hasMoreProducts = visibleProducts.length > 3;
+
+
+
+const productsToShow =
+
+hasMoreProducts
+
+?
+
+visibleProducts.slice(0,3)
+
+:
+
+visibleProducts;
+
+
+
 html+=`
+
+<div class="brand-section ${isSingleProduct ? "single-product" : ""}">
+
 
 <div class="brand-title">
 
@@ -209,14 +242,55 @@ ${group.brand}
 
 </div>
 
+
+<div class="products-grid">
+
 `;
 
-visibleProducts.forEach(product=>{
+
+
+productsToShow.forEach(product=>{
 
 html+=createCard(product);
 
 });
 
+
+
+html+=`
+
+</div>
+
+`;
+
+
+
+if(hasMoreProducts){
+
+html+=`
+
+<button class="show-more-products">
+
+نمایش همه محصولات ${group.brand}
+
+</button>
+
+`;
+
+}
+
+
+
+html+=`
+
+</div>
+
+`;
+
+});
+
+
+container.innerHTML=html;
 });
 
 container.innerHTML=html;
