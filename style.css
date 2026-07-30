@@ -1,258 +1,93 @@
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    font-family: Tahoma, Arial, sans-serif;
-    background: #F8F6F2;
-    color: #222222;
-    min-height: 100vh;
+body{
+    font-family:Tahoma, Arial, sans-serif;
+    background:#F8F6F2;
+    color:#222222;
+    min-height:100vh;
 }
 
-main {
-    max-width: 480px;
-    margin: auto;
-    padding: 25px 20px 40px;
+main{
+    max-width:480px;
+    margin:auto;
+    padding:25px 20px 40px;
 }
 
+/* ===========================
+   Hero
+=========================== */
 
-/* بخش اصلی شبیه کارت ویزیت */
-
-.hero {
-    background: #FFFFFF;
-    border: 1px solid rgba(212,175,55,0.35);
-    border-radius: 24px;
-    padding: 45px 25px;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
-}
-
-
-.logo-box {
-    width: 100%;
-    height: 180px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 25px;
-}
-
-
-.logo-box img {
-    max-width: 170px;
-    max-height: 170px;
-    object-fit: contain;
-}
-
-
-h1 {
-    font-size: 28px;
-    line-height: 1.8;
-    color: #222222;
-    margin-bottom: 20px;
-}
-
-
-.subtitle {
-    font-size: 16px;
-    line-height: 2;
-    color: #d4af37;
-    margin-bottom: 30px;
-}
-
-
-button {
-    background: #d4af37;
-    color: #1b1713;
-    border: none;
-    padding: 14px 45px;
-    border-radius: 30px;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-
-/* کارت‌های پایین صفحه */
-
-.order-btn{
-    display:inline-block;
-    background:#d4af37;
-    color:#1b1713;
-    text-decoration:none;
-    padding:16px 34px;
-    border-radius:40px;
-    font-size:18px;
-    font-weight:bold;
-    margin-top:10px;
-    transition:.3s;
-}
-
-.order-btn:hover{
-    transform:translateY(-2px);
-}
-
-.quick-menu{
-
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
-    margin-top:30px;
-
-}
-
-.menu-card{
+.hero{
 
     background:#FFFFFF;
-    border:1px solid rgba(212,175,55,.25);
-    border-radius:22px;
-    padding:28px 18px;
+
+    border:1px solid rgba(212,175,55,.35);
+
+    border-radius:24px;
+
+    padding:45px 25px;
+
     text-align:center;
-    cursor:pointer;
-    transition:.3s;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
 
 }
 
-.menu-card:hover{
+.logo-box{
 
-    transform:translateY(-4px);
+    width:100%;
 
-}
+    height:180px;
 
-.full{
+    display:flex;
 
-    grid-column:1 / 3;
+    justify-content:center;
 
-}
+    align-items:center;
 
-.icon{
-
-    font-size:34px;
-    margin-bottom:12px;
+    margin-bottom:25px;
 
 }
 
-.menu-card h3{
+.logo-box img{
 
-    color:#222222;
-    font-size:18px;
-    font-weight:normal;
+    max-width:170px;
 
-}
+    max-height:170px;
 
-.delivery-box {
-
-    margin-top: 30px;
-
-    background: #ffffff;
-
-    border-radius: 24px;
-
-    padding: 25px 18px;
-
-    text-align: center;
-
-    border: 1px solid #eeeeee;
-
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    object-fit:contain;
 
 }
 
+h1{
 
-.delivery-box h3 {
+    font-size:28px;
 
-    color: #222222;
+    line-height:1.8;
 
-    font-size: 20px;
+    color:#222;
 
-    line-height: 1.8;
-
-    margin-bottom: 15px;
-
-}
-
-#next-delivery {
-
-    color: #222222;
-    font-size: 18px;
-    line-height: 2;
-    margin-bottom: 8px;
+    margin-bottom:20px;
 
 }
 
+.subtitle{
 
-#countdown {
+    font-size:16px;
 
-    color: #D4AF37;
+    line-height:2;
 
-    font-size: 40px;
+    color:#D4AF37;
 
-    font-weight: 700;
-
-    letter-spacing: 3px;
-
-    margin: 15px 0;
+    margin-bottom:30px;
 
 }
-
-.delivery-box span {
-
-    color: #c9b896;
-    font-size: 14px;
-
-}
-
-
-.order-btn {
-
-    display: block;
-    width: 100%;
-    background: #25D366;
-    color: white;
-    text-decoration: none;
-
-    padding: 16px;
-    border-radius: 14px;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    text-align: center;
-
-    margin-top: 25px;
-
-    box-shadow: 0 8px 20px rgba(37,211,102,0.25);
-
-    transition: .3s;
-
-}
-
-
-.order-btn:hover {
-
-    transform: translateY(-3px);
-
-}
-
-* {
-    font-family: 'Vazirmatn', sans-serif;
-}
-
-h1, h2, h3 {
-    font-weight: 700;
-}
-
-p, span {
-    font-weight: 400;
-}
-
-button, .order-btn {
-    font-weight: 600;
-}
-
 
 .start-order-btn{
 
@@ -268,7 +103,7 @@ button, .order-btn {
 
     background:#111;
 
-    color:white;
+    color:#fff;
 
     text-decoration:none;
 
@@ -276,17 +111,390 @@ button, .order-btn {
 
     font-weight:700;
 
-    box-shadow:
-
-    0 15px 30px rgba(0,0,0,.2);
+    box-shadow:0 15px 30px rgba(0,0,0,.2);
 
     transition:.25s;
 
 }
 
-
 .start-order-btn:hover{
 
     transform:translateY(-4px);
+
+}
+
+/* ===========================
+   Quick Menu
+=========================== */
+
+.quick-menu{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:16px;
+
+    margin-top:30px;
+
+}
+
+.menu-card{
+
+    display:block;
+
+    background:#fff;
+
+    border:1px solid rgba(212,175,55,.25);
+
+    border-radius:22px;
+
+    padding:28px 18px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    text-decoration:none;
+
+    color:#222;
+
+}
+
+.menu-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.icon{
+
+    font-size:34px;
+
+    margin-bottom:12px;
+
+}
+
+.menu-card h3{
+
+    font-size:18px;
+
+    font-weight:400;
+
+}
+
+/* ===========================
+   Delivery Box
+=========================== */
+
+.delivery-box{
+
+    margin-top:30px;
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:25px 18px;
+
+    text-align:center;
+
+    border:1px solid #eeeeee;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+}
+
+.delivery-box h3{
+
+    color:#222;
+
+    font-size:20px;
+
+    line-height:1.8;
+
+    margin-bottom:15px;
+
+}
+
+#next-delivery{
+
+    color:#222;
+
+    font-size:18px;
+
+    line-height:2;
+
+    margin-bottom:8px;
+
+}
+
+#countdown{
+
+    color:#D4AF37;
+
+    font-size:40px;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    margin:15px 0;
+
+}
+
+.delivery-box span{
+
+    color:#c9b896;
+
+    font-size:14px;
+
+}
+
+/* ===========================
+   Order Button
+=========================== */
+
+.order-btn{
+
+    display:block;
+
+    width:100%;
+
+    background:#25D366;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    margin-top:25px;
+
+    box-shadow:0 8px 20px rgba(37,211,102,.25);
+
+    transition:.3s;
+
+}
+
+.order-btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* ===========================
+   Fonts
+=========================== */
+
+*{
+
+    font-family:'Vazirmatn',sans-serif;
+
+}
+
+h1,h2,h3{
+
+    font-weight:700;
+
+}
+
+p,span{
+
+    font-weight:400;
+
+}
+
+button,
+
+.order-btn{
+
+    font-weight:600;
+
+}
+
+/* ===========================
+   Buildings Page
+=========================== */
+
+.buildings-box{
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:28px 22px;
+
+    margin-top:30px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    border:1px solid rgba(212,175,55,.25);
+
+}
+
+.buildings-title{
+
+    text-align:center;
+
+    font-size:24px;
+
+    margin-bottom:25px;
+
+    color:#222;
+
+    font-weight:700;
+
+}
+
+.building-item{
+
+    padding:18px 0;
+
+    border-bottom:1px solid #ececec;
+
+    line-height:2;
+
+    font-size:17px;
+
+}
+
+.building-item:last-child{
+
+    border-bottom:none;
+
+}
+
+/* ===========================
+   Buildings Buttons
+=========================== */
+
+.buildings-actions{
+
+    margin-top:35px;
+
+}
+
+/* دکمه شروع ثبت سفارش
+   دقیقاً مشابه صفحه اول */
+
+.buildings-actions .start-order-btn{
+
+    display:block;
+
+    margin:0 auto 18px;
+
+    max-width:350px;
+
+    padding:18px;
+
+    border-radius:20px;
+
+    background:#111;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    text-align:center;
+
+    font-size:19px;
+
+    font-weight:700;
+
+    box-shadow:0 15px 30px rgba(0,0,0,.2);
+
+    transition:.25s;
+
+}
+
+.buildings-actions .start-order-btn:hover{
+
+    transform:translateY(-4px);
+
+}
+
+/* دکمه بازگشت
+   دقیقاً مشابه صفحه سفارش */
+
+.buildings-actions .new-order-btn{
+
+    display:block;
+
+    width:100%;
+
+    margin-top:0;
+
+    padding:14px;
+
+    border-radius:16px;
+
+    border:1px solid #ddd;
+
+    background:#fff;
+
+    color:#555;
+
+    text-decoration:none;
+
+    text-align:center;
+
+    font-size:15px;
+
+    transition:.25s;
+
+}
+
+.buildings-actions .new-order-btn:hover{
+
+    background:#f5f5f5;
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width:480px){
+
+    main{
+
+        padding:20px 16px 35px;
+
+    }
+
+    .hero{
+
+        padding:35px 20px;
+
+    }
+
+    h1{
+
+        font-size:24px;
+
+    }
+
+    .subtitle{
+
+        font-size:15px;
+
+    }
+
+    .building-item{
+
+        font-size:16px;
+
+    }
 
 }
