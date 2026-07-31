@@ -890,8 +890,8 @@ if(whatsappBtn){
 
 if(paymentCard){
 
-    paymentCard.innerHTML =
-    PAYMENT_CARD;
+paymentCard.innerHTML =
+'<span dir="ltr">' + PAYMENT_CARD + '</span>';
 
 }
 
