@@ -8,6 +8,7 @@ const WHATSAPP_ACTIVE_TIME = 30 * 60; // 30 دقیقه
 
 const ORDER_KEY = "mrCigaroOrder";
 
+
 // ======================================
 // اطلاعات قابل تغییر
 // ======================================
@@ -20,20 +21,18 @@ const WHATSAPP_NUMBER = "989125246071";
 
 
 // ======================================
-// روزهای تعطیل
-// فرمت تاریخ: YYYY-MM-DD
+// تعطیلات
 // ======================================
+
+// تاریخ ها با فرمت میلادی YYYY-MM-DD
 
 const HOLIDAYS = [
 
     "2026-07-01",
-    "2026-07-05",
-    "2026-07-06"
+
+    "2026-07-05"
 
 ];
-
-const HOLIDAY_MESSAGE =
-"🔴 امروز امکان ثبت سفارش وجود ندارد.<br>از فردا دوباره در خدمت شما هستیم.";
 
 
 // ======================================
@@ -76,6 +75,7 @@ document.getElementById("redirect-message");
 const statusBox =
 document.getElementById("status-box");
 
+
 const paymentCard =
 document.getElementById("payment-card");
 
@@ -87,8 +87,11 @@ document.getElementById("payment-owner");
 const copyHint =
 document.getElementById("copy-hint");
 
+
 const copyCardBtn =
 document.getElementById("copy-card-btn");
+
+
 
 // ======================================
 // ساخت ساعت امروز
@@ -96,18 +99,6 @@ document.getElementById("copy-card-btn");
 
 function createTodayTime(hour, minute){
 
-    function isHoliday(){
-
-    const now = new Date();
-
-    const today =
-        now.getFullYear() + "-" +
-        String(now.getMonth()+1).padStart(2,"0") + "-" +
-        String(now.getDate()).padStart(2,"0");
-
-    return HOLIDAYS.includes(today);
-
-}
 
     let time = new Date();
 
@@ -126,6 +117,35 @@ function createTodayTime(hour, minute){
 }
 
 
+
+// ======================================
+// بررسی تعطیلی
+// ======================================
+
+function isHoliday(){
+
+
+    const today = new Date();
+
+
+    const date =
+
+    today.getFullYear()
+
+    + "-"
+
+    + String(today.getMonth()+1).padStart(2,"0")
+
+    + "-"
+
+    + String(today.getDate()).padStart(2,"0");
+
+
+
+    return HOLIDAYS.includes(date);
+
+
+}
 
 // ======================================
 // فرمت تایمر
@@ -178,6 +198,7 @@ function formatTime(seconds){
 
 
 
+
 // ======================================
 // بررسی ساعت سرویس
 // ======================================
@@ -210,18 +231,10 @@ function isServiceActive(){
 
 
 
+
 // ======================================
 // پایان زمان سفارش امروز
 // ======================================
-
-if(isHoliday()){
-
-    updateStatus();
-
-    return;
-
-}
-
 
 function isOrderClosed(){
 
@@ -236,6 +249,9 @@ function isOrderClosed(){
 
 
 }
+
+
+
 
 // ======================================
 // گرفتن زمان باقی مانده تا 9 صبح
@@ -256,9 +272,6 @@ function getTimeUntilFirstDelivery(){
     );
 
 
-
-    // اگر از 9 صبح گذشته باشد
-    // اولین تحویل فردا است
 
     if(now >= target){
 
@@ -285,6 +298,7 @@ function getTimeUntilFirstDelivery(){
 
 
 
+
 // ======================================
 // تایمر عادی صفحه
 // ======================================
@@ -293,6 +307,17 @@ function startNormalTimer(){
 
 
     let remaining;
+
+
+
+    if(isHoliday()){
+
+
+        return;
+
+
+    }
+
 
 
 
@@ -315,13 +340,22 @@ function startNormalTimer(){
 
 
 
+
     setInterval(()=>{
 
 
 
-        // اگر سفارش واتساپ ثبت شده باشد
-
         if(localStorage.getItem(ORDER_KEY)){
+
+
+            return;
+
+
+        }
+
+
+
+        if(isHoliday()){
 
 
             return;
@@ -337,8 +371,6 @@ function startNormalTimer(){
 
 
 
-
-        // در ساعات فعال
 
         if(isServiceActive()){
 
@@ -359,10 +391,8 @@ function startNormalTimer(){
 
 
 
-        // خارج از ساعات فعال
 
         else{
-
 
 
             remaining =
@@ -375,9 +405,17 @@ function startNormalTimer(){
 
 
 
-        countdown.innerHTML =
 
-        formatTime(remaining);
+        if(countdown){
+
+
+            countdown.innerHTML =
+
+            formatTime(remaining);
+
+
+        }
+
 
 
 
@@ -386,7 +424,6 @@ function startNormalTimer(){
 
 
 }
-
 
 
 
@@ -451,8 +488,6 @@ function startWhatsappTimer(){
 
 
 
-        // بعد از 30 دقیقه
-
         if(passed >= WHATSAPP_ACTIVE_TIME){
 
 
@@ -512,9 +547,15 @@ function startWhatsappTimer(){
 
 
 
-        countdown.innerHTML =
+        if(countdown){
 
-        formatTime(remaining);
+
+            countdown.innerHTML =
+
+            formatTime(remaining);
+
+
+        }
 
 
 
@@ -524,6 +565,7 @@ function startWhatsappTimer(){
 
 
 }
+
 
 
 
@@ -546,7 +588,68 @@ function updateStatus(){
 
 
 
+
     const now = new Date();
+
+
+
+
+
+    // بررسی تعطیلی
+
+    if(isHoliday()){
+
+
+
+        statusBox.innerHTML =
+
+
+        "🔴 امروز تعطیل هستیم<br><br>از فردا ساعت ۷:۳۰ آماده دریافت سفارش هستیم 🌿";
+
+
+
+
+
+        if(whatsappBtn){
+
+
+
+            whatsappBtn.disabled = true;
+
+
+            whatsappBtn.style.opacity = "0.5";
+
+
+            whatsappBtn.style.cursor =
+
+            "not-allowed";
+
+
+        }
+
+
+
+
+
+        if(countdown){
+
+
+            countdown.innerHTML =
+
+            "--:--:--";
+
+
+        }
+
+
+
+
+
+        return;
+
+
+    }
+
 
 
 
@@ -568,6 +671,7 @@ function updateStatus(){
 
         statusBox.innerHTML =
 
+
         "🟡 اولین ارسال امروز از ساعت ۹:۰۰ شروع می‌شود";
 
 
@@ -586,6 +690,7 @@ function updateStatus(){
 
 
         statusBox.innerHTML =
+
 
         "🔴 زمان ثبت سفارش امروز به پایان رسیده است";
 
@@ -611,6 +716,7 @@ function updateStatus(){
 
 
 
+
         return;
 
 
@@ -622,11 +728,14 @@ function updateStatus(){
 
     statusBox.innerHTML =
 
+
     "🟢 آماده دریافت سفارش";
 
 
 
 }
+
+
 
 // ======================================
 // کلیک روی دکمه واتساپ
@@ -643,6 +752,23 @@ if(whatsappBtn){
 
 
 
+        // جلوگیری از ثبت سفارش در روز تعطیل
+
+        if(isHoliday()){
+
+
+
+            updateStatus();
+
+
+            return;
+
+
+        }
+
+
+
+
         // اگر زمان سفارش تمام شده باشد
 
         if(isOrderClosed()){
@@ -651,26 +777,13 @@ if(whatsappBtn){
 
             updateStatus();
 
-            if(isHoliday()){
-
-    statusBox.innerHTML = HOLIDAY_MESSAGE;
-
-    if(whatsappBtn){
-
-        whatsappBtn.disabled = true;
-        whatsappBtn.style.opacity = "0.5";
-        whatsappBtn.style.cursor = "not-allowed";
-
-    }
-
-    return;
-
-}
 
             return;
 
 
         }
+
+
 
 
 
@@ -686,6 +799,7 @@ if(whatsappBtn){
 
 
 
+
         localStorage.setItem(
 
             ORDER_KEY,
@@ -693,6 +807,7 @@ if(whatsappBtn){
             JSON.stringify(orderData)
 
         );
+
 
 
 
@@ -713,11 +828,13 @@ if(whatsappBtn){
 
 
 
+
         setTimeout(()=>{
 
 
 
             let message =
+
 
             encodeURIComponent(
 
@@ -737,6 +854,7 @@ if(whatsappBtn){
 
 
 
+
             window.location.href =
 
 
@@ -748,7 +866,9 @@ if(whatsappBtn){
 
 
 
+
         },500);
+
 
 
 
@@ -758,6 +878,11 @@ if(whatsappBtn){
 
 
 }
+
+
+
+
+
 
 // ======================================
 // نمایش اطلاعات پرداخت
@@ -771,12 +896,17 @@ if(paymentCard){
 }
 
 
+
+
 if(paymentOwner){
 
     paymentOwner.innerHTML =
     "به نام: " + PAYMENT_OWNER;
 
 }
+
+
+
 
 
 
@@ -787,11 +917,15 @@ if(paymentOwner){
 if(copyCardBtn && copyHint){
 
 
+
     copyCardBtn.addEventListener(
+
 
     "click",
 
+
     function(){
+
 
 
         navigator.clipboard.writeText(
@@ -801,49 +935,70 @@ if(copyCardBtn && copyHint){
         );
 
 
+
+
+
         copyCardBtn.innerHTML =
+
 
         "✅ کپی شد";
 
 
 
+
+
         copyHint.innerHTML =
 
+
         "شماره کارت آماده پرداخت است";
+
+
+
 
 
 
         setTimeout(()=>{
 
 
+
             copyCardBtn.innerHTML =
+
 
             "📋 کپی شماره کارت";
 
 
+
+
+
             copyHint.innerHTML =
 
+
             "برای پرداخت، شماره کارت را کپی کنید";
+
+
 
 
         },2000);
 
 
 
+
+
     });
+
 
 
 }
 
 
-
-
+ 
 // ======================================
 // شروع برنامه
 // ======================================
 
 
 updateStatus();
+
 
 
 
@@ -866,15 +1021,11 @@ else{
 
     startNormalTimer();
 
-if(isHoliday()){
 
-    countdown.innerHTML = "--:--:--";
-
-    return;
 
 }
 
-}
+
 
 
 
