@@ -950,7 +950,7 @@ if(copyCardBtn && copyHint){
         copyHint.innerHTML =
 
 
-        "شماره کارت آماده پرداخت است";
+        "شماره کارت کپی شد";
 
 
 
@@ -973,7 +973,7 @@ if(copyCardBtn && copyHint){
             copyHint.innerHTML =
 
 
-            "برای پرداخت، شماره کارت را کپی کنید";
+            "برای کپی شماره کارت، روی دکمه زیر بزنید";
 
 
 
