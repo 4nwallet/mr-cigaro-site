@@ -96,6 +96,18 @@ document.getElementById("copy-card-btn");
 
 function createTodayTime(hour, minute){
 
+    function isHoliday(){
+
+    const now = new Date();
+
+    const today =
+        now.getFullYear() + "-" +
+        String(now.getMonth()+1).padStart(2,"0") + "-" +
+        String(now.getDate()).padStart(2,"0");
+
+    return HOLIDAYS.includes(today);
+
+}
 
     let time = new Date();
 
@@ -201,6 +213,15 @@ function isServiceActive(){
 // ======================================
 // پایان زمان سفارش امروز
 // ======================================
+
+if(isHoliday()){
+
+    updateStatus();
+
+    return;
+
+}
+
 
 function isOrderClosed(){
 
@@ -630,6 +651,21 @@ if(whatsappBtn){
 
             updateStatus();
 
+            if(isHoliday()){
+
+    statusBox.innerHTML = HOLIDAY_MESSAGE;
+
+    if(whatsappBtn){
+
+        whatsappBtn.disabled = true;
+        whatsappBtn.style.opacity = "0.5";
+        whatsappBtn.style.cursor = "not-allowed";
+
+    }
+
+    return;
+
+}
 
             return;
 
@@ -830,7 +866,13 @@ else{
 
     startNormalTimer();
 
+if(isHoliday()){
 
+    countdown.innerHTML = "--:--:--";
+
+    return;
+
+}
 
 }
 
