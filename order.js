@@ -13,7 +13,7 @@ const ORDER_KEY = "mrCigaroOrder";
 // اطلاعات قابل تغییر
 // ======================================
 
-const PAYMENT_CARD = "5041 7212 2230 0692";
+const PAYMENT_CARD = "0692 2230 7212 5041";
 
 const PAYMENT_OWNER = "داوود سلطانی";
 
