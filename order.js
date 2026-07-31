@@ -28,7 +28,7 @@ const WHATSAPP_NUMBER = "989125246071";
 
 const HOLIDAYS = [
 
-    "2026-07-01",
+    "2026-07-31",
 
     "2026-07-05"
 
